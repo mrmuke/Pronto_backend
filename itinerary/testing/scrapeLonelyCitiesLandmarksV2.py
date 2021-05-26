@@ -7,7 +7,7 @@ cityLandmarks ={}
 
 for city in cities:
     url='https://www.lonelyplanet.com/'+city.replace(" ", "-")
-    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+    driver = webdriver.Chrome(r"C:\Users\congh\Downloads\chromedriver")
 
     driver.get(url)
     city_full_url=driver.current_url
@@ -21,7 +21,7 @@ for city in cities:
         landmarks[t]=[]
         for page in range(1,3):
             url =city_full_url+"/"+t+"?page="+str(page)+("&subtypes=Train%20Station%2CBus" if t=="transportation" else "")
-            driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+            driver = webdriver.Chrome(r"C:\Users\congh\Downloads\chromedriver")
 
             driver.get(url)
             time.sleep(2)

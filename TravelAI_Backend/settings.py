@@ -25,7 +25,7 @@ SECRET_KEY = ')4lrn32m_xo$ev(nz2^v@$d4e@7u9!36db^m1xvef*n@6_ee#y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['desktop-109hilr', 'localhost']
 
 
 # Application definition
@@ -123,8 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = False # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
-

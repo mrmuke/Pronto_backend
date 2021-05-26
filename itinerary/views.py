@@ -7,12 +7,13 @@ import requests
 import numpy as np
 import json
 from .routeOptimization import createSchedule
-from .models import Schedule
+from .models import Schedule, Review
 from .serializers import ScheduleSerializer
 from .flight import get_best_flight
 import datetime
-class GetSchedule(generics.RetrieveAPIView):
+from rest_framework.views import APIView
 
+class GetSchedule(generics.RetrieveAPIView):
     def get(self, *args, **kwargs):
         days=int(self.request.GET.get("days"))
         city=self.request.GET.get("city").replace("-"," ")
@@ -23,12 +24,12 @@ class GetSchedule(generics.RetrieveAPIView):
 
 class ViewSchedule(generics.RetrieveAPIView):
     serializer_class = ScheduleSerializer
-
     def get(self, *args, **kwargs):
         id=self.kwargs["id"]
         schedule=Schedule.objects.get(id=id)
         codes={
-            "Hong Kong":"HKG"
+            "Hong Kong":"HKG",
+            "Maui": "OGG"
         }
         today=datetime.datetime.today()
         flight = get_best_flight(schedule.origin,codes[schedule.city],(today+datetime.timedelta(days=1)).strftime('%Y-%m-%d'),(today+datetime.timedelta(days=schedule.length+1)).strftime('%Y-%m-%d'))
@@ -41,13 +42,61 @@ class ChangeAirport(generics.RetrieveAPIView):
         id=self.kwargs["id"]
         schedule=Schedule.objects.get(id=id)
         codes={
-            "Hong Kong":"HKG"
+            "Hong Kong":"HKG",
+            "Maui": "OGG"
         }
         today=datetime.datetime.today()
         flight = get_best_flight(schedule.origin,codes[schedule.city],(today+datetime.timedelta(days=1)).strftime('%Y-%m-%d'),(today+datetime.timedelta(days=days+1)).strftime('%Y-%m-%d'))
         return Response({'plan': self.get_serializer(schedule, context={'request': self.request}).data,'flight':flight})
 
+class SubmitComment(APIView):
+    def post(self, request, format=None):
+        if(request.method == "POST"):
+            data = json.loads(request.body.decode("UTF-8"))
+            schedule = Schedule.objects.get(id=data["id"])
+            curReview = Review(name=data["name"], comment=data["comment"], rating=data["rating"],schedule=schedule)
+            curReview.save()
+            return Response("hui")
 
+class GetComment(APIView):
+    def post(self, request, format=None):
+        review = Review.objects.filter(schedule_id=json.loads(request.body.decode("UTF-8"))["id"])
+        arr = []
+        for obj in review:
+            arr.append({
+                "comment": obj.comment,
+                "name": obj.name,
+                "rating": obj.rating
+            })
+        print(arr)
+        return Response({"reviews": arr})
 
-
-
+class SearchCities(APIView):
+    def post(self, request, format=None):
+        city = json.loads(request.body.decode("UTF-8"))["city"]
+        if(city == "all"):
+            schedules = Schedule.objects.all()[:30]
+        else:
+            schedules = Schedule.objects.filter(city__icontains=city)
+        arr = []
+        for schedule in schedules:
+            review = Review.objects.filter(schedule_id=schedule.id)
+            total = 0
+            for obj in review:
+                total+=obj.rating
+            if(len(review) != 0):
+                total = total/(len(review))
+            arr.append({
+                "id": schedule.id,
+                "city":schedule.city,
+                "length":schedule.length,
+                "departure":schedule.departure,
+                "arrvial":schedule.arrival,
+                "hotel":schedule.hotel,
+                "transportation":schedule.transportation,
+                "origin":schedule.origin,
+                "rating":total,
+                "comments": len(review)
+            })
+        print(len(schedules))
+        return Response({"Schedules": arr})

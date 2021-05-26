@@ -15,7 +15,7 @@ cityLandmarks ={}
 
 for city in cities:
     url ='https://www.lonelyplanet.com/'+city.replace(" ", "-")
-    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+    driver = webdriver.Chrome(r"C:\Users\congh\Downloads\chromedriver")
     driver.get(url)
     
     #create plan by getting top locations and find nearby restruants and optimal path
