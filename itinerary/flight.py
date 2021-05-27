@@ -16,7 +16,7 @@ def page_scrape(driver):
     
     xp_sections = '//div[starts-with(@class,"section duration")]'
     #WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.XPATH, xp_sections)))
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(20)
     sections = driver.find_elements_by_xpath(xp_sections)
     sections_list = [value.text for value in sections]
     section_a = sections_list[0] # This is to separate the two flights
