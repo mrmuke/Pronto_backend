@@ -97,8 +97,8 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
-#DATABASES['default']['ENGINE']='django.db.backends.sqlite3'
-#DATABASES['default']['NAME'] = 'db.sqlite3'
+DATABASES['default']['ENGINE']='django.db.backends.sqlite3'
+DATABASES['default']['NAME'] = 'db.sqlite3'
 
 
 # Password validation
