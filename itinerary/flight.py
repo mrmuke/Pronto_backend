@@ -1,6 +1,10 @@
 from time import sleep
 from selenium import webdriver
 import os
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
@@ -11,6 +15,8 @@ def page_scrape(driver):
     """This function takes care of the scraping part"""
     
     xp_sections = '//div[starts-with(@class,"section duration")]'
+    #WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.XPATH, xp_sections)))
+    driver.implicitly_wait(5)
     sections = driver.find_elements_by_xpath(xp_sections)
     sections_list = [value.text for value in sections]
     section_a = sections_list[0] # This is to separate the two flights
@@ -97,7 +103,7 @@ def page_scrape(driver):
     return flight
 def start_kayak(city_from, city_to, date_start, date_end):
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)#webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
 
 
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
@@ -112,7 +118,6 @@ def start_kayak(city_from, city_to, date_start, date_end):
         driver.find_elements_by_xpath(xp_popup_close)[len(driver.find_elements_by_xpath(xp_popup_close))-1].click()
     except Exception as e:
         pass
-    sleep(10)
     
     
     print('starting first scrape.....')
