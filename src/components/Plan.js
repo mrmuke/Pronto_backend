@@ -25,7 +25,7 @@ export default function Plan(){
     },[])
     
     function getPlan(){
-        axios.get("http://localhost:8000/api/plan/"+id)
+        axios.get("https://prontotravel.herokuapp.com/api/plan/"+id)
         .then(result => {
           setPlan(result.data.plan)
           console.log(result.data.plan)
@@ -114,7 +114,7 @@ function Day({plan,setPlan,index,showSchedule,day}){
         const newPlan = Object.assign({}, plan);
         newPlan["day_set"][index]["location_set"] = newList;
         setPlan(newPlan)
-        axios.put('http://localhost:8000/api/plan/'+loc.id,loc)
+        axios.put('https://prontotravel.herokuapp.com/api/plan/'+loc.id,loc)
         setEditLoc(null)
     }
   return (<><div ref={todoRef}  className="todo-cmp" style={{visibility:(showSchedule?"visible":""),position:(showSchedule?"initial":""),width:(showSchedule?"100%":"")}}>
