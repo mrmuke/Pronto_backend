@@ -26,4 +26,4 @@ urlpatterns = [
     path('api/cities/', include('cities.urls') ),
     path('api/plan/', include('itinerary.urls') ),
 
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+[re_path('.*',never_cache(TemplateView.as_view(template_name='index.html')))]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+[re_path('.*',never_cache(TemplateView.as_view(template_name='index.html',content_type="application/javascript")))]

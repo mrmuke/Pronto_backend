@@ -252,7 +252,7 @@ def createSchedule(num_days,city,origin):
 
         
 
-        result = geneticAlgorithm(population=destinations, popSize=50, eliteSize=5, mutationRate=0.01, generations=100)
+        result = geneticAlgorithm(population=destinations, popSize=20, eliteSize=3, mutationRate=0.01, generations=15)
         for index,x in enumerate(result):
             x.order=index
             x.save()

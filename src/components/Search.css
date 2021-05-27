@@ -107,8 +107,7 @@ button{
   .card-search-image {
     height:200px;
     width:100%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
     object-fit: cover;
   }
 
@@ -126,7 +125,7 @@ button{
   }
   .card-search-text {
     margin: 25px;
-    height:167px;
+    height:auto;
   }
   .card-search-text .date {
     color: rgb(255, 7, 110);

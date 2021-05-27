@@ -38,7 +38,7 @@ function HeroSection() {
   }
   return (
     <div className="hero-main-container">
-      <img className="background" src='/images/beach.jpg' />
+      <img className="background" src='/static/images/beach.jpg' />
 
       <div className='hero-container'>
 
