@@ -97,11 +97,7 @@ export default function Search(){
                             if(obj == undefined){
                                 break;
                             }
-                            arr.push(<div className="card-search" onClick={
-                                ()=>{
-                                    window.location.href="http://localhost:3000/plan/"+obj.id
-                                }
-                            }>
+                            arr.push(<Link className="card-search" to={`/plan/${obj.id}`} >
                             <img class="card-search-image" src={obj.image}></img>
                             <div class="card-search-text">
                                 <span>from {obj.origin}</span>
@@ -133,7 +129,7 @@ export default function Search(){
                                 <div class="type">rating</div>
                                 </div>
                             </div>
-                        </div>)
+                        </Link>)
                         }
                         return arr;
                     })()
