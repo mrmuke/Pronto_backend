@@ -1,7 +1,11 @@
 from time import sleep
 from selenium import webdriver
-
-
+import os
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
     
 def page_scrape(driver):
     """This function takes care of the scraping part"""
@@ -93,7 +97,8 @@ def page_scrape(driver):
     return flight
 def start_kayak(city_from, city_to, date_start, date_end):
 
-    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
 
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
              '/' + date_start + '-flexible/' + date_end + '-flexible?sort=bestflight_a')
