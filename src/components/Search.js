@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import "font-awesome/css/font-awesome.min.css"
 import "./Search.css"
 import cities from "./cities.json"
+import { Link } from "react-router-dom";
 
 export default function Search(){
     const[search, setSearch] = useState("");
