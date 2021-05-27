@@ -19,7 +19,7 @@ export default function Search(){
             }
         }
 
-        request.open("POST", "http://localhost:8000/api/plan/getPlans");
+        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getPlans");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             "city":"all"
@@ -36,7 +36,7 @@ export default function Search(){
             }
         }
 
-        request.open("POST", "http://localhost:8000/api/plan/getPlans");
+        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getPlans");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             "city":search

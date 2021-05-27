@@ -23,7 +23,7 @@ function HeroSection() {
   function getDestinations() {
     console.log("Getting Data")
     setLoading(true)
-    axios.get("http://localhost:8000/api/cities/dictionaryDestination?adjs=" + JSON.stringify(adjectives))
+    axios.get("https://prontotravel.herokuapp.com/api/cities/dictionaryDestination?adjs=" + JSON.stringify(adjectives))
       .then(result => {
         setCity(result.data)
         setLoading(false)

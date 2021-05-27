@@ -24,7 +24,7 @@ export default function Comments({plan}){
                 setComment("");
             }
         }
-        request.open("POST", "http://localhost:8000/api/plan/submitComment");
+        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/submitComment");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             name:name,
@@ -41,7 +41,7 @@ export default function Comments({plan}){
                 setReviews(JSON.parse(request.response)["reviews"]);
             }
         }
-        request.open("POST", "http://localhost:8000/api/plan/getComments");
+        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getComments");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             id:plan.id,
