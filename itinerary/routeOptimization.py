@@ -225,9 +225,10 @@ def createSchedule(num_days,city,origin):
                     loc=Location(lat=lat,lng=lng,name=i,type=key,day=curDay)
                     
                     destinations.append(loc)
-                    #famous plans,bugs with ariport, change airport, get hotel price and payment,check all features
+                    #famous plans,bugs with ariport and tyr different cities, change airport, get hotel price and payment,check all features,deploy,make faster and stop reloading error flight bugs with map lat lng,  unique historical  cultural urban  66
 
-                    #signup my completed trips and comment and have recommended bsaed on previous  and complete events
+                    #signup my completed trips and comment and have recommended bsaed on previous  and complete events and default airport want not sign up because convenient
+
         #TODEO
         #didnt add bank account - log in, subscribable plans, pay for bookings
         #comments and reviews

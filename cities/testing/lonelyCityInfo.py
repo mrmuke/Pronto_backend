@@ -34,7 +34,7 @@ with open('./cityInformation.json') as f:
 
 for city in cities:
     url ='https://www.lonelyplanet.com/'+city.replace(" ", "-")
-    driver = webdriver.Chrome(r"C:\Users\congh\Downloads\chromedriver")
+    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
     driver.get(url)
     
     if(not re.search(r'The page you are looking for', driver.page_source)):

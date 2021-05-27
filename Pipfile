@@ -14,6 +14,7 @@ wikipedia = "*"
 pandas = "*"
 matplotlib = "*"
 selenium = "*"
+gunicorn = "==20.0.4"
 
 [requires]
 python_version = "3.8"

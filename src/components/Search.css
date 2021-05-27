@@ -1,0 +1,184 @@
+html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+.searchbar{
+    width:100%;
+    height:40px;
+    border-radius: 2vw;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.searchbar:focus{
+    outline:none;
+}
+
+.search-container{
+    width:100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container:first-child{
+    display:flex;
+}
+
+.search-container:nth-child(2){
+    position:absolute;
+    z-index: 100;
+}
+
+.searchbar-container{
+    width:50%;
+    position:relative;
+}
+
+.search-button{
+    position:absolute;
+    left:95%;
+    padding: 10px;
+    top:-10%;
+    border-radius: 50%;
+    background-color: black;
+}
+input{
+  border:none
+}
+button{
+  border:none
+}
+
+.search-button i{
+    font-size:20px;
+    color:white;
+    border:none;
+}
+
+.autocomplete{
+    width:46%;
+    margin:auto;
+    padding-left:11px;
+    border-left:2px solid black;
+    border-right:2px solid black;
+}
+
+.autocomplete:last-child{
+    border-bottom:2px solid black;
+}
+
+.autocomplete:nth-child(odd){
+    background-color: rgb(228, 228, 228);
+}
+
+.autocomplete:nth-child(even){
+    background-color: white;
+}
+
+.autocomplete:hover{
+    background-color: rgb(168, 168, 168);
+    cursor:pointer;
+}
+
+.card-search-container{
+    width:100%;
+    display:flex;
+    height:100vh;
+    justify-content: center;
+}
+
+.card-search {
+    border-radius: 18px;
+    background: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin:30px 30px 30px 30px;
+    width:300px;
+    height:484px;
+  }
+
+  .card-search-image {
+    height:200px;
+    width:100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+  }
+
+  .card-search-text {
+    grid-area: text;
+  }
+
+  .card-search-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: black;
+  }
+  .card-search-text {
+    margin: 25px;
+    height:167px;
+  }
+  .card-search-text .date {
+    color: rgb(255, 7, 110);
+    font-size:13px;
+  }
+  .card-search-text p {
+    color: grey;
+    font-size:15px;
+    font-weight: 300;
+  }
+  .card-search-text h2 {
+    margin-top:0px;
+    font-size:28px;
+  }
+
+  .card-search-text div{
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;;
+      width:100%;
+      text-align: left;
+  }
+
+  .card-search-stats .stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    padding:10px;
+  }
+
+  .card-search:hover {
+    transform: scale(1.15);
+  }
+
+@media(max-width:1000px){
+  html,body
+  {
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+      overflow:initial;
+  }
+
+  .card-search-container{
+   flex-direction: column;
+   justify-content: space-between;
+   height:100%;
+   padding-bottom:20px
+  }
+  .card-search{
+    margin:auto;
+    margin-top:50px;
+  }
+}

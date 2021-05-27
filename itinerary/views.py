@@ -12,7 +12,23 @@ from .serializers import LocationSerializer, ScheduleSerializer
 from .flight import get_best_flight
 import datetime
 from rest_framework.views import APIView
-
+codes={
+            "Hong Kong":"HKG",
+            "Maui": "OGG",
+            "Bangkok":"DMK",
+            "London":"YXU",
+            "Macau":"MFM",
+            "Singapore":"SIN",
+            "Paris":"LBG",
+            "Tahiti":"PPT",
+            "Tokyo":"NRT",
+            "Rome":"CIA",
+            "Phuket":"HKT",
+            "Barcelona":"BCN",
+            "Bali":"DPS",
+            "Dubai":"DXB",
+            "New York City":"JFK"
+        }
 class GetSchedule(generics.RetrieveAPIView):
     def get(self, *args, **kwargs):
         days=int(self.request.GET.get("days"))
@@ -27,13 +43,11 @@ class ViewSchedule(generics.RetrieveUpdateAPIView):
     def get(self, *args, **kwargs):
         id=self.kwargs["id"]
         schedule=Schedule.objects.get(id=id)
-        codes={
-            "Hong Kong":"HKG",
-            "Maui": "OGG"
-        }
+        
         today=datetime.datetime.today()
-        flight={'OutDay': '5/27', 'OutWeekday': 'Thu', 'OutDuration': '54h03m', 'OutCities': 'MDW‐HKG', 'ReturnDay': '6/1', 'ReturnWeekday': 'Tue', 'ReturnDuration': '57h23m', 'ReturnCities': 'HKG‐MDW', 'OutStops': '3 stops', 'OutStopCities': 'TYS, BOS, ...', 'ReturnStops': '3 stops', 'ReturnStopCities': 'IST, IAH-HOU, ...', 'OutTime': '8:57 pm – 4:00 pm +3', 'OutAirline': 'Allegiant Air, Qatar Airways', 'ReturnTime': '8:57 pm – 4:00 pm +3', 'ReturnAirline': 'Turkish Airlines, Allegiant Air', 'Price': 1440}
-        #flight = get_best_flight(schedule.origin,codes[schedule.city],(today+datetime.timedelta(days=1)).strftime('%Y-%m-%d'),(today+datetime.timedelta(days=schedule.length+1)).strftime('%Y-%m-%d'))
+        
+        #flight={'OutDay': '5/27', 'OutWeekday': 'Thu', 'OutDuration': '54h03m', 'OutCities': 'MDW‐HKG', 'ReturnDay': '6/1', 'ReturnWeekday': 'Tue', 'ReturnDuration': '57h23m', 'ReturnCities': 'HKG‐MDW', 'OutStops': '3 stops', 'OutStopCities': 'TYS, BOS, ...', 'ReturnStops': '3 stops', 'ReturnStopCities': 'IST, IAH-HOU, ...', 'OutTime': '8:57 pm – 4:00 pm +3', 'OutAirline': 'Allegiant Air, Qatar Airways', 'ReturnTime': '8:57 pm – 4:00 pm +3', 'ReturnAirline': 'Turkish Airlines, Allegiant Air', 'Price': 1440}
+        flight = get_best_flight(schedule.origin,codes[schedule.city],(today+datetime.timedelta(days=1)).strftime('%Y-%m-%d'),(today+datetime.timedelta(days=schedule.length+1)).strftime('%Y-%m-%d'))
         return Response({'plan': self.get_serializer(schedule, context={'request': self.request}).data,'flight':flight})
     def put(self, request,*args, **kwargs):
         Location.objects.filter(id=self.kwargs["id"]).delete()
@@ -49,10 +63,7 @@ class ChangeAirport(generics.RetrieveAPIView):
     def get(self, *args, **kwargs):
         id=self.kwargs["id"]
         schedule=Schedule.objects.get(id=id)
-        codes={
-            "Hong Kong":"HKG",
-            "Maui": "OGG"
-        }
+
         today=datetime.datetime.today()
         flight = get_best_flight(schedule.origin,codes[schedule.city],(today+datetime.timedelta(days=1)).strftime('%Y-%m-%d'),(today+datetime.timedelta(days=days+1)).strftime('%Y-%m-%d'))
         return Response({'plan': self.get_serializer(schedule, context={'request': self.request}).data,'flight':flight})
@@ -94,6 +105,10 @@ class SearchCities(APIView):
                 total+=obj.rating
             if(len(review) != 0):
                 total = total/(len(review))
+            display_img=""
+            with open('./cityInformation.json') as f:
+                display_img = json.load(f)[schedule.city]["images"][0]
+                print(display_img)
             arr.append({
                 "id": schedule.id,
                 "city":schedule.city,
@@ -104,7 +119,7 @@ class SearchCities(APIView):
                 "transportation":schedule.transportation,
                 "origin":schedule.origin,
                 "rating":total,
-                "comments": len(review)
+                "comments": len(review),
+                "image":display_img
             })
-        print(len(schedules))
         return Response({"Schedules": arr})
