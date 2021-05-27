@@ -225,7 +225,8 @@ def createSchedule(num_days,city,origin):
                     loc=Location(lat=lat,lng=lng,name=i,type=key,day=curDay)
                     
                     destinations.append(loc)
-                    #famous plans,bugs with ariport, edit schedule and message when edited and change dynamic height, change airport, get hotel price and payment, choose avaliable cities
+                    #famous plans,bugs with ariport, change airport, get hotel price and payment,check all features
+
                     #signup my completed trips and comment and have recommended bsaed on previous  and complete events
         #TODEO
         #didnt add bank account - log in, subscribable plans, pay for bookings

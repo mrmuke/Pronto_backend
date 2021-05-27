@@ -39,7 +39,7 @@ class Location(models.Model):
         ordering = ["order"]
 
 class Review(models.Model):
+    name = models.CharField(max_length=50, default="")
     comment= models.CharField(max_length=500)
     rating = models.SmallIntegerField()
-    schedule=models.ForeignKey(Schedule,on_delete=models.CASCADE)
-    
+    schedule = models.ForeignKey(Schedule,on_delete=models.CASCADE)

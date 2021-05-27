@@ -13,7 +13,7 @@ with open('./countries.json') as f:
 for country in countries:
     for city in countries[country]:
         url ='https://www.lonelyplanet.com/'+country.replace(" ", "-")+'/'+city.replace(" ", "-")
-        driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+        driver = webdriver.Chrome(r"C:\Users\congh\Downloads\chromedriver")
         driver.get(url)
         
         if(not re.search(r'The page you are looking for', driver.page_source)):
