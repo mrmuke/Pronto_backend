@@ -134,3 +134,4 @@ class GetCity(generics.RetrieveAPIView):
         
 #embed google maps picture
         return Response(city)
+
