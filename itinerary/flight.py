@@ -28,9 +28,6 @@ def page_scrape(driver):
     """This function takes care of the scraping part"""
     xp_sections = '//div[starts-with(@class,"section duration")]'
 
-    sleep(10)
-    driver.get_screenshot_as_file("screenshot.png")
-
     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
     #driver.implicitly_wait(20)
     print(driver.get_window_size())
