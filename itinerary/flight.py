@@ -106,7 +106,7 @@ def page_scrape(driver):
     return flight
 def start_kayak(city_from, city_to, date_start, date_end):
 
-    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")#webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)#webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")#
 
 
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
