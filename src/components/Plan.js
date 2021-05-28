@@ -25,7 +25,7 @@ export default function Plan(){
     },[])
     
     function getPlan(){
-        axios.get("http://localhost:8000/api/plan/"+id/* "https://prontotravel.herokuapp.com/api/plan/"+id */)
+        axios.get(/* "http://localhost:8000/api/plan/"+id */"https://prontotravel.herokuapp.com/api/plan/"+id)
         .then(result => {
           setPlan(result.data.plan)
           console.log(result.data.plan)
