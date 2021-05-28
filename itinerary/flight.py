@@ -2,7 +2,6 @@ from time import sleep
 #from selenium import webdriver
 import undetected_chromedriver as uc
 
-import os
 from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.wait import WebDriverWait
