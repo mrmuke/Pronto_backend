@@ -1,21 +1,37 @@
 from time import sleep
-from selenium import webdriver
+#from selenium import webdriver
+import undetected_chromedriver as uc
+
 import os
 from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+#change webdirver down
+#chrome_options = webdriver.ChromeOptions()
+options=uc.ChromeOptions()
+options.headless=True
+options.add_argument('--headless')
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("window-size=1050,708")
+#chrome_options.add_argument("--headless")
+#chrome_options.add_argument("--disable-dev-shm-usage")
+#chrome_options.add_argument("--no-sandbox")
+#chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+#chrome_options.add_experimental_option('useAutomationExtension', False)
+#chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+#chrome_options.add_argument("--window-size=1900,1080")
+#chrome_options.add_argument('--no-proxy-server')
+#chrome_options.add_argument("--proxy-server='direct://'")
+#chrome_options.add_argument("--proxy-bypass-list=*")
 def page_scrape(driver):
     """This function takes care of the scraping part"""
     xp_sections = '//div[starts-with(@class,"section duration")]'
+
+    sleep(10)
+    driver.get_screenshot_as_file("screenshot.png")
+
     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
     #driver.implicitly_wait(20)
     print(driver.get_window_size())
@@ -106,7 +122,8 @@ def page_scrape(driver):
     return flight
 def start_kayak(city_from, city_to, date_start, date_end):
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)#webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")#
+    #driver = webdriver.Chrome(executable_path=r"C:\Users\mxing\Downloads\chromedriver",chrome_options=chrome_options)##webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)#
+    driver = uc.Chrome(options=options)
 
 
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
