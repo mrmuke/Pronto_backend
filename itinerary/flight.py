@@ -1,23 +1,24 @@
 from time import sleep
 from selenium import webdriver
 import os
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
-    
+chrome_options.add_argument("window-size=1050,708")
 def page_scrape(driver):
     """This function takes care of the scraping part"""
-    print(driver.page_source)
     xp_sections = '//div[starts-with(@class,"section duration")]'
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
+    WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
     #driver.implicitly_wait(20)
-    print(driver.page_source)
+    print(driver.get_window_size())
     sections = driver.find_elements_by_xpath(xp_sections)
     print(sections)
     sections_list = [value.text for value in sections]
@@ -105,7 +106,7 @@ def page_scrape(driver):
     return flight
 def start_kayak(city_from, city_to, date_start, date_end):
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)#webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")
+    driver = webdriver.Chrome(r"C:\Users\mxing\Downloads\chromedriver")#webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
