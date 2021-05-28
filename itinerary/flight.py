@@ -13,11 +13,13 @@ chrome_options.add_argument("--no-sandbox")
     
 def page_scrape(driver):
     """This function takes care of the scraping part"""
-    
+    print(driver.page_source)
     xp_sections = '//div[starts-with(@class,"section duration")]'
-    #WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.XPATH, xp_sections)))
-    driver.implicitly_wait(20)
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
+    #driver.implicitly_wait(20)
+    print(driver.page_source)
     sections = driver.find_elements_by_xpath(xp_sections)
+    print(sections)
     sections_list = [value.text for value in sections]
     section_a = sections_list[0] # This is to separate the two flights
     section_b = sections_list[1] # This is to separate the two flights
