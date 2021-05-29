@@ -30,9 +30,9 @@ def page_scrape(driver):
 
     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
     #driver.implicitly_wait(20)
-    print(driver.get_window_size())
+    #rint(driver.get_window_size())
     sections = driver.find_elements_by_xpath(xp_sections)
-    print(sections)
+    #print(sections)
     sections_list = [value.text for value in sections]
     section_a = sections_list[0] # This is to separate the two flights
     section_b = sections_list[1] # This is to separate the two flights
@@ -125,7 +125,7 @@ def start_kayak(city_from, city_to, date_start, date_end):
     kayak = ('https://www.kayak.com/flights/' + city_from + '-' + city_to +
              '/' + date_start + '-flexible/' + date_end + '-flexible?sort=bestflight_a')
     driver.get(kayak)
-    sleep(4)
+    sleep(2)
     
     # sometimes a popup shows up, so we can use a try statement to check it and close
     try:
@@ -138,20 +138,20 @@ def start_kayak(city_from, city_to, date_start, date_end):
     
     print('starting first scrape.....')
     info = page_scrape(driver)
-    sleep(2)
+    #sleep(2)
     
     # We can keep track of what they predict and how it actually turns out!
-    xp_loading = '//*[contains(@id,"advice")]'
-    loading = driver.find_element_by_xpath(xp_loading).text
-    xp_prediction = '//span[@class="info-text"]'
-    prediction = driver.find_element_by_xpath(xp_prediction).text
+    #xp_loading = '//*[contains(@id,"advice")]'
+    #loading = driver.find_element_by_xpath(xp_loading).text
+    #xp_prediction = '//span[@class="info-text"]'
+    #prediction = driver.find_element_by_xpath(xp_prediction).text
     
     # sometimes we get this string in the loading variable, which will conflict with the email we send later
     # just change it to "Not Sure" if it happens
     weird = '¯\\_(ツ)_/¯'
-    if loading == weird:
-        loading = 'Not sure'
-    info["prediction"]=prediction
+    #if loading == weird:
+    #    loading = 'Not sure'
+    #info["prediction"]=prediction
     driver.quit()
     return info
     
