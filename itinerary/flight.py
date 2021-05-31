@@ -17,7 +17,7 @@ options.add_argument('--headless')
 def get_best_flight(city_from,city_to, date_start,date_end):
     try:
         logger.info("Getting Best FLight")
-        start_kayak(city_from, city_to, str(date_start), str(date_end))
+        return start_kayak(city_from, city_to, str(date_start), str(date_end))
 
     except Exception as e:
         logger.error(e)
