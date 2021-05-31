@@ -1,5 +1,5 @@
 import axios from "axios";
-import React,{ createRef, useEffect, useReducer, useRef, useState } from "react"
+import React,{ createRef, useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
@@ -10,7 +10,6 @@ import AppMap from "./AppMap";
 import Ticket from "./Ticket";
 import Comments from "./Comments";
 import { Button } from "./Button";
-import { useEffect, useRef } from 'react'
 import useInterval from './useInterval'
 import { API_URL } from "./API_URL";
 
