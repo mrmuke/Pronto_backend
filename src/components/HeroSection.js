@@ -24,7 +24,7 @@ function HeroSection() {
   function getDestinations() {
     console.log("Getting Data")
     setLoading(true)
-    axios.get(`${API_URL}api/cities/dictionaryDestination?adjs=` + JSON.stringify(adjectives))
+    axios.get(`${API_URL}/api/cities/dictionaryDestination?adjs=` + JSON.stringify(adjectives))
       .then(result => {
         setCity(result.data)
         setLoading(false)
