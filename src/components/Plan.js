@@ -32,6 +32,7 @@ export default function Plan(){
       if(flightId){
         console.log("checking")
         const check = await axios.get("http://localhost:8000/api/plan/job?job="+flightId)
+        check=check.data
         if(check.status&&"in-queue"&&check.status!="waiting"&&check.status!="failed"&&check.status!=undefined){
           console.log(check)
           setFlight(check)
