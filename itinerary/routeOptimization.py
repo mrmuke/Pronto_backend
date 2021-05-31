@@ -226,6 +226,7 @@ def createSchedule(num_days,city,origin):
                     
                     destinations.append(loc)
                     #change airport, get hotel price and payment,check all features,deploy,make faster and stop reloading error flight bugs with map lat lng,  
+                    #add redis queue for route and flight and maybe generations to default
 
                     #signup my completed trips and comment and have recommended bsaed on previous  and complete events and default airport want not sign up because convenient
 
@@ -248,7 +249,6 @@ def createSchedule(num_days,city,origin):
         #add review and rating after "i went here" and add pay and schedule
         #get popular schedules for destination -premade trips
         #touches to look
-        #enter adjective and go instead
 
         
 

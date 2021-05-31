@@ -10,11 +10,17 @@ import AppMap from "./AppMap";
 import Ticket from "./Ticket";
 import Comments from "./Comments";
 import { Button } from "./Button";
+import { useEffect, useRef } from 'react'
+import useInterval from './useInterval'
+import { API_URL } from "./API_URL";
+
+
 export default function Plan(){
     
     const [plan,setPlan] = useState(null)
     const [showSchedule,setShowSchedule] = useState(false)
     const [flight,setFlight]=useState(null)
+    const [flightId,setFlightId]=useState(null)
     let { id } = useParams();
     
     
@@ -23,16 +29,26 @@ export default function Plan(){
         getPlan()
 
     },[])
-    
+    useInterval(async()=>{
+      if(flightId){
+        console.log("checking")
+        const check = await axios.get("http://localhost:8000/api/plan/job?job="+flightId)
+        if(check.status!="in-queue"||check.status!="waiting"||check.status!="failed"){
+          setFlight(check)
+        }
+      }
+      
+    },1000)
     function getPlan(){
-        axios.get(/* "http://localhost:8000/api/plan/"+id */"https://prontotravel.herokuapp.com/api/plan/"+id)
+        axios.get(`${API_URL}/api/plan/`+id)
         .then(result => {
           setPlan(result.data.plan)
           console.log(result.data.plan)
-          setFlight(result.data.flight)
-        })
+          setFlightId(result.data.flight)
+/*           setFlight(result.data.flight)
+ */        })
     }
-    if(!plan){
+    if(!flight){
         return <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',height:'100vh'}}><h2>OPTIMIZING FLIGHT</h2><div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div></div>
@@ -114,7 +130,7 @@ function Day({plan,setPlan,index,showSchedule,day}){
         const newPlan = Object.assign({}, plan);
         newPlan["day_set"][index]["location_set"] = newList;
         setPlan(newPlan)
-        axios.put('https://prontotravel.herokuapp.com/api/plan/'+loc.id,loc)
+        axios.put(`${API_URL}/api/plan/`+loc.id,loc)
         setEditLoc(null)
     }
   return (<><div ref={todoRef}  className="todo-cmp" style={{visibility:(showSchedule?"visible":""),position:(showSchedule?"initial":""),width:(showSchedule?"100%":"")}}>

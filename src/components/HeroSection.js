@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
+import { API_URL } from './API_URL';
 import { Button } from './Button';
 import './HeroSection.css';
 
@@ -23,7 +24,7 @@ function HeroSection() {
   function getDestinations() {
     console.log("Getting Data")
     setLoading(true)
-    axios.get("https://prontotravel.herokuapp.com/api/cities/dictionaryDestination?adjs=" + JSON.stringify(adjectives))
+    axios.get(`${API_URL}api/cities/dictionaryDestination?adjs=` + JSON.stringify(adjectives))
       .then(result => {
         setCity(result.data)
         setLoading(false)

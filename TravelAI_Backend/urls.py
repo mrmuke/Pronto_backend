@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/cities/', include('cities.urls') ),
     path('api/plan/', include('itinerary.urls') ),
+    path('rq/', include('django_rq.urls'))
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+[re_path('.*',never_cache(TemplateView.as_view(template_name='index.html')))]

@@ -1,38 +1,32 @@
 from time import sleep
-#from selenium import webdriver
 import undetected_chromedriver as uc
 
 from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-#change webdirver down
-#chrome_options = webdriver.ChromeOptions()
+from django_rq import job
+
+import logging
+logger = logging.getLogger(__name__)
+
 options=uc.ChromeOptions()
 options.headless=True
 options.add_argument('--headless')
+@job
+def get_best_flight(city_from,city_to, date_start,date_end):
+    try:
+        logger.info("Getting Best FLight")
+        start_kayak(city_from, city_to, str(date_start), str(date_end))
 
-#chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-
-#chrome_options.add_argument("--headless")
-#chrome_options.add_argument("--disable-dev-shm-usage")
-#chrome_options.add_argument("--no-sandbox")
-#chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-#chrome_options.add_experimental_option('useAutomationExtension', False)
-#chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-#chrome_options.add_argument("--window-size=1900,1080")
-#chrome_options.add_argument('--no-proxy-server')
-#chrome_options.add_argument("--proxy-server='direct://'")
-#chrome_options.add_argument("--proxy-bypass-list=*")
+    except Exception as e:
+        logger.error(e)
 def page_scrape(driver):
     """This function takes care of the scraping part"""
     xp_sections = '//div[starts-with(@class,"section duration")]'
 
     WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH, xp_sections)))
-    #driver.implicitly_wait(20)
-    #rint(driver.get_window_size())
     sections = driver.find_elements_by_xpath(xp_sections)
-    #print(sections)
     sections_list = [value.text for value in sections]
     section_a = sections_list[0] # This is to separate the two flights
     section_b = sections_list[1] # This is to separate the two flights
@@ -138,7 +132,6 @@ def start_kayak(city_from, city_to, date_start, date_end):
     
     print('starting first scrape.....')
     info = page_scrape(driver)
-    #sleep(2)
     
     # We can keep track of what they predict and how it actually turns out!
     #xp_loading = '//*[contains(@id,"advice")]'
@@ -156,11 +149,4 @@ def start_kayak(city_from, city_to, date_start, date_end):
     return info
     
 
-def get_best_flight(city_from,city_to, date_start,date_end):
-
-
-    flight = start_kayak(city_from, city_to, str(date_start), str(date_end))
-
-    
-    return flight
 

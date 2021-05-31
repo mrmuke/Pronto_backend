@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import random from "random-name"
 import './Comments.css'
+import { API_URL } from './API_URL';
 export default function Comments({plan}){
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(10);
@@ -24,7 +25,7 @@ export default function Comments({plan}){
                 setComment("");
             }
         }
-        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/submitComment");
+        request.open("POST", `${API_URL}/api/plan/submitComment`);
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             name:name,
@@ -41,7 +42,7 @@ export default function Comments({plan}){
                 setReviews(JSON.parse(request.response)["reviews"]);
             }
         }
-        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getComments");
+        request.open("POST", `${API_URL}/api/plan/getComments`);
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             id:plan.id,

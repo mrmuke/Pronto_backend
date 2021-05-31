@@ -3,6 +3,7 @@ import "font-awesome/css/font-awesome.min.css"
 import "./Search.css"
 import cities from "./cities.json"
 import { Link } from "react-router-dom";
+import { API_URL } from "./API_URL";
 
 export default function Search(){
     const[search, setSearch] = useState("");
@@ -20,7 +21,7 @@ export default function Search(){
             }
         }
 
-        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getPlans");
+        request.open("POST", `${API_URL}/api/plan/getPlans`);
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             "city":"all"
@@ -37,7 +38,7 @@ export default function Search(){
             }
         }
 
-        request.open("POST", "https://prontotravel.herokuapp.com/api/plan/getPlans");
+        request.open("POST", `${API_URL}/api/plan/getPlans`);
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({
             "city":search

@@ -5,6 +5,7 @@ import { Button } from "./Button";
 import MapChart from "./MapChart";
 import './City.css'
 import FlightSearch from "./FlightSearch";
+import { API_URL } from "./API_URL";
 export default function City(){
     const [city,setCity] = useState(null)
     const [plan,setPlan] = useState(null)
@@ -16,7 +17,7 @@ export default function City(){
         getCity()
     },[])
     function getCity(){
-        axios.get("https://prontotravel.herokuapp.com/api/cities/city?city=" + name)
+        axios.get(`${API_URL}/api/cities/city?city=` + name)
         .then(result => {
           setCity(result.data)
           console.log(result.data)
@@ -24,7 +25,7 @@ export default function City(){
     }
     function createPlan(){
         setLoading(true)
-        axios.get(`https://prontotravel.herokuapp.com/api/plan/getSchedule?city=${name}&days=${numDays}&from=${fromCity}`)
+        axios.get(`${API_URL}/api/plan/getSchedule?city=${name}&days=${numDays}&from=${fromCity}`)
         .then(result=>{ 
             setPlan(result.data);
         })
