@@ -225,10 +225,12 @@ def createSchedule(num_days,city,origin):
                     loc=Location(lat=lat,lng=lng,name=i,type=key,day=curDay)
                     
                     destinations.append(loc)
-                    #change airport, get hotel price and payment,check all features,deploy,make faster and stop reloading error flight bugs with map lat lng,  
-                    #add redis queue for route and flight and maybe generations to default
 
-                    #signup my completed trips and comment and have recommended bsaed on previous  and complete events and default airport want not sign up because convenient
+
+        #change airport, get hotel price and payment,check all features,deploy,make faster and stop reloading error flight bugs with map lat lng,  
+        #add redis queue for route and flight and maybe generations to default
+
+        #signup my completed trips and comment and have recommended bsaed on previous  and complete events and default airport want not sign up because convenient
 
         #TODEO
         #didnt add bank account - log in, subscribable plans, pay for bookings
@@ -242,7 +244,6 @@ def createSchedule(num_days,city,origin):
         #book restaurants and hotel charge extra
         #details - flight arrival time all recommended stuff
 
-
         #add hotel bookings or link
         #flight search
         #shuttle buses, rental cars
@@ -250,7 +251,6 @@ def createSchedule(num_days,city,origin):
         #get popular schedules for destination -premade trips
         #touches to look
 
-        
 
         result = geneticAlgorithm(population=destinations, popSize=20, eliteSize=3, mutationRate=0.01, generations=15)
         for index,x in enumerate(result):
